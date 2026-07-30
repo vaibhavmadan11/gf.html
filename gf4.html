@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Girlfriend's Day, My Love</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #f0ebfd;
+      --card-bg: #ffffff;
+      --primary-purple: #9b72cf;
+      --light-purple: #c8b6ff;
+      --pill-bg: #f8f5ff;
+      --text-dark: #3a3247;
+      --text-muted: #7d758f;
+      --shadow-color: rgba(155, 114, 207, 0.15);
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-hand: 'Caveat', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: radial-gradient(rgba(180, 160, 220, 0.2) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 540px;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      background: #ffffff;
+      border: 1px solid #e2d9f3;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--primary-purple);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px var(--shadow-color);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #b185db, #8e54e9);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(142, 84, 233, 0.3);
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(142, 84, 233, 0.4);
+    }
+
+    /* SCREEN 1: ENVELOPE */
+    .envelope-wrapper {
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .envelope {
+      width: 320px;
+      height: 220px;
+      background: #ffd3df;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 15px 35px var(--shadow-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 40px 0;
+      transition: transform 0.3s ease;
+    }
+
+    .envelope:hover {
+      transform: scale(1.02);
+    }
+
+    .envelope-card {
+      position: absolute;
+      width: 280px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      top: -30px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+
+    .envelope-card h2 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .envelope-card p.handwritten {
+      font-family: var(--font-hand);
+      font-size: 1.5rem;
+      color: #9b72cf;
+    }
+
+    .envelope-card p.sub {
+      font-family: var(--font-hand);
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .heart-seal {
+      width: 45px;
+      height: 45px;
+      background: #ff6b8b;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(255, 107, 139, 0.4);
+    }
+
+    .tap-hint {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* MAIN CONTAINER CARD */
+    .main-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 32px 24px;
+      width: 100%;
+      box-shadow: 0 20px 40px var(--shadow-color);
+      text-align: center;
+      position: relative;
+    }
+
+    .profile-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 3px solid #eadaff;
+      margin: -10px auto 15px auto;
+      background: #fdf5f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      overflow: hidden;
+    }
+
+    .title-main {
+      font-family: var(--font-heading);
+      font-size: 1.9rem;
+      color: var(--text-dark);
+      margin: 10px 0 2px 0;
+    }
+
+    .subtitle-handwritten {
+      font-family: var(--font-hand);
+      font-size: 1.6rem;
+      color: var(--primary-purple);
+      margin-bottom: 16px;
+    }
+
+    .body-desc {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      padding: 0 10px;
+    }
+
+    /* Music Player Widget */
+    .music-player {
+      background: var(--pill-bg);
+      border: 1px solid #ebdfff;
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .music-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #ffd3df;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .music-info {
+      flex: 1;
+    }
+
+    .music-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .music-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .play-btn {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-purple);
+      border-radius: 50%;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+
+    .sticker-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .sticker-card {
+      background: #fcfbfe;
+      border: 1px solid #f0e8fb;
+      border-radius: 14px;
+      padding: 10px;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    /* Carousel & Photo Frame */
+    .carousel-container {
+      position: relative;
+      margin: 15px 0;
+    }
+
+    .polaroid-card {
+      background: white;
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 16px 16px 24px 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .polaroid-img-frame {
+      width: 100%;
+      height: 320px;
+      background: #fef8fa;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .polaroid-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .upload-fallback {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--primary-purple);
+      text-align: center;
+      gap: 8px;
+    }
+
+    .upload-fallback span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .polaroid-caption {
+      font-family: var(--font-hand);
+      font-size: 1.5rem;
+      color: var(--primary-purple);
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 45%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .nav-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: white;
+      border: 1px solid #e0d6f3;
+      cursor: pointer;
+      pointer-events: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+      color: var(--primary-purple);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .flower-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .flower-card {
+      background: #faf8ff;
+      border: 1px solid #eee6fc;
+      border-radius: 16px;
+      padding: 16px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .flower-icon { font-size: 1.8rem; }
+    .flower-text { font-size: 0.8rem; color: var(--text-dark); font-weight: 500; line-height: 1.3; }
+
+    .letter-box { text-align: left; font-size: 0.95rem; line-height: 1.7; color: var(--text-dark); }
+    .letter-box p { margin-bottom: 16px; }
+    .letter-sig { text-align: left; margin-top: 25px; }
+    .letter-sig .closing { font-family: var(--font-hand); font-size: 1.7rem; color: var(--primary-purple); }
+    .letter-sig .author { font-size: 0.8rem; letter-spacing: 1.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-top: 4px; }
+    .dashed-divider { border: none; border-top: 1px dashed #dcd0f0; margin: 15px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Direct HTML Audio Source -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-10074.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCREEN 1: ENVELOPE -->
+  <div class="screen active" id="screen-1">
+    <div class="badge">♥ FOR THE GIRL I ADORE</div>
+    <div class="envelope-wrapper" onclick="goToScreen(2)">
+      <div class="envelope">
+        <div class="envelope-card">
+          <h2>a little world, made for you</h2>
+          <p class="handwritten">happy girlfriend's day, my love ♡</p>
+          <p class="sub">yours, always</p>
+        </div>
+        <div class="heart-seal">N</div>
+      </div>
+    </div>
+    <p class="tap-hint">TAP ANYWHERE TO BEGIN ♡</p>
+  </div>
+
+  <!-- SCREEN 2: HERO & MUSIC -->
+  <div class="screen" id="screen-2">
+    <div class="main-card">
+      <div class="profile-avatar">🌸</div>
+      <div class="badge">♥ FOR MY FAVOURITE PERSON</div>
+      <h1 class="title-main">Happy Girlfriend's Day</h1>
+      <div class="subtitle-handwritten">for you, always ♡</div>
+      
+      <p class="body-desc">
+        Today is all about you. I built this tiny corner of the internet to say what I don't say often enough — that you make ordinary days feel like the good kind of story. Stay a while, my love.
+      </p>
+
+      <div class="music-player">
+        <div class="music-thumb">🎵</div>
+        <div class="music-info">
+          <div class="music-title">I Love You - Akull</div>
+          <div class="music-sub">TERA RAKUNGA KHAYAL ♡</div>
+        </div>
+        <button class="play-btn" id="play-pause-btn" onclick="toggleAudio()">▶</button>
+      </div>
+
+      <div class="sticker-grid">
+        <div class="sticker-card">🐱</div>
+        <div class="sticker-card">🐻</div>
+        <div class="sticker-card">💐</div>
+      </div>
+
+      <button class="btn-primary" onclick="goToScreen(3)">SEE OUR LITTLE ALBUM →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: PHOTO CAROUSEL -->
+  <div class="screen" id="screen-3">
+    <div class="main-card">
+      <div class="badge">♥ OUR MOMENTS</div>
+      <h1 class="title-main">us, in a few frames</h1>
+      <div class="subtitle-handwritten">a handful of moments I'd relive on loop ♡</div>
+
+      <div class="carousel-container">
+        <div class="polaroid-card">
+          <div class="polaroid-img-frame" onclick="triggerFileInput()">
+            <img src="photo1.jpg" id="carousel-img" alt="Namya Photo" onerror="handleImgError(this)">
+            <div id="upload-hint" class="upload-fallback" style="display:none;">
+              <p style="font-size:2rem;">📸</p>
+              <p><b>Click to select photo</b></p>
+              <span>Tap here to upload image from your device</span>
+            </div>
+            <input type="file" id="local-file-input" accept="image/*" style="display:none" onchange="loadLocalImage(event)">
+          </div>
+          <div class="polaroid-caption" id="carousel-caption">the day I realised you were my favourite hello.</div>
+        </div>
+        <div class="carousel-nav">
+          <button class="nav-btn" onclick="prevSlide()">←</button>
+          <button class="nav-btn" onclick="nextSlide()">→</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="goToScreen(4)">WHY I ADORE YOU →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: FLOWER GRID -->
+  <div class="screen" id="screen-4">
+    <div class="main-card">
+      <div class="badge">♥ A LITTLE BOUQUET</div>
+      <h1 class="title-main">a bloom for every reason I adore you</h1>
+      <div class="subtitle-handwritten">picked just for you ♡</div>
+
+      <div class="flower-grid">
+        <div class="flower-card"><div class="flower-icon">🌺</div><div class="flower-text">you feel like home</div></div>
+        <div class="flower-card"><div class="flower-icon">🌸</div><div class="flower-text">your laugh is my favourite sound</div></div>
+        <div class="flower-card"><div class="flower-icon">🪻</div><div class="flower-text">you make ordinary days magic</div></div>
+        <div class="flower-card"><div class="flower-icon">🪷</div><div class="flower-text">you're my calm and my spark</div></div>
+        <div class="flower-card"><div class="flower-icon">🌷</div><div class="flower-text">you make me want to be better</div></div>
+        <div class="flower-card"><div class="flower-icon">🌼</div><div class="flower-text">it's you. it's always you.</div></div>
+      </div>
+
+      <button class="btn-primary" onclick="goToScreen(5)">READ MY LETTER →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5: LOVE LETTER -->
+  <div class="screen" id="screen-5">
+    <div class="main-card">
+      <div class="profile-avatar">🐶</div>
+      <div class="badge">♥ A LETTER, JUST FOR YOU</div>
+      <div class="subtitle-handwritten" style="font-size: 2.2rem; margin-top: 10px;">My darling Namya,</div>
+      <hr class="dashed-divider">
+      <div class="letter-box">
+        <p>Happy Girlfriend's Day, my love. You came into my life so quietly, yet somehow became the most beautiful part of it. There are so many things I never say enough, but if there's one thing I want you to know, it's that you've changed me in ways I never expected. You make ordinary days feel special, and even during the hardest moments, the thought of you brings me comfort. Thank you for every conversation, every smile, every little effort, and every moment you've stayed when you didn't have to. No matter how much time passes, I think a part of me will always be grateful that out of all the people in this world, our paths crossed. You are not just someone I love; you are someone I genuinely cherish, admire, and want beside me through every chapter of life. If one day you ever forget how much you mean to me, come back to these words and remember that you are deeply loved, more than I could ever fit into a paragraph.</p>
+      </div>
+      <hr class="dashed-divider">
+      <div class="letter-sig">
+        <div class="closing">yours, completely,</div>
+        <div class="author">— YOUR PERSON</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const audioElement = document.getElementById('bg-audio');
+    const playBtn = document.getElementById('play-pause-btn');
+    let isPlaying = false;
+
+    function toggleAudio() {
+      if (isPlaying) {
+        audioElement.pause();
+        playBtn.innerText = '▶';
+        isPlaying = false;
+      } else {
+        audioElement.play().then(() => {
+          playBtn.innerText = '❚❚';
+          isPlaying = true;
+        }).catch(err => {
+          console.log("Autoplay prevented:", err);
+        });
+      }
+    }
+
+    function goToScreen(screenNumber) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      const targetScreen = document.getElementById(`screen-${screenNumber}`);
+      if(targetScreen) {
+        targetScreen.classList.add('active');
+      }
+
+      // Try playing audio as soon as user opens envelope
+      if (screenNumber === 2 && !isPlaying) {
+        toggleAudio();
+      }
+    }
+
+    // How to use your exact MP3:
+    // Simply download Akull - I Love You .mp3 file and save it in the same folder as this index.html file named 'song.mp3'
+
+    const slides = [
+      { img: 'photo1.jpg', caption: 'the day I realised you were my favourite hello.' },
+      { img: 'photo2.jpg', caption: 'our softest memories and quiet moments.' },
+      { img: 'photo3.jpg', caption: 'always my favourite view, forever.' }
+    ];
+    let currentSlide = 0;
+
+    function handleImgError(img) {
+      img.style.display = 'none';
+      document.getElementById('upload-hint').style.display = 'flex';
+    }
+
+    function triggerFileInput() {
+      document.getElementById('local-file-input').click();
+    }
+
+    function loadLocalImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imgElem = document.getElementById('carousel-img');
+          imgElem.src = e.target.result;
+          imgElem.style.display = 'block';
+          document.getElementById('upload-hint').style.display = 'none';
+          slides[currentSlide].img = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function updateSlide() {
+      const imgElem = document.getElementById('carousel-img');
+      const uploadHint = document.getElementById('upload-hint');
+      
+      imgElem.style.display = 'block';
+      uploadHint.style.display = 'none';
+      imgElem.src = slides[currentSlide].img;
+      document.getElementById('carousel-caption').innerText = slides[currentSlide].caption;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlide();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlide();
+    }
+  </script>
+</body>
+</html>
